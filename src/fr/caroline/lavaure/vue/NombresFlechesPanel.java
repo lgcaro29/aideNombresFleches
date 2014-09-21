@@ -23,7 +23,7 @@ public class NombresFlechesPanel extends Container {
 	private JComboBox<Integer> nombreCombo;
 
 	private JPanel conteneur = new JPanel();
-	
+
 	private Dimension size;
 
 	public NombresFlechesPanel(Dimension _dim) {
@@ -67,14 +67,25 @@ public class NombresFlechesPanel extends Container {
 		panelCentre.setLayout(new BoxLayout(panelCentre, BoxLayout.PAGE_AXIS)); // positionnement en colonne 
 
 		this.panel.add(panelCentre, BorderLayout.CENTER);
-		
+
 	}
 
 	class BoutonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 
-			int nombre = Integer.parseInt(nombreFTextField.getText());
+			int nombre;
+			// on vérifie bien que c'est un nombre qui est saisi
+			String strg = nombreFTextField.getText();
+			if (strg.matches("~[3-45]")){
+				nombre = Integer.parseInt(nombreFTextField.getText());
+			}
+			else
+			{
+				nombre = 3;
+				nombreFTextField.setText("3");
+			}
+
 			int nombreDeChiffres = (Integer) nombreCombo.getSelectedItem();
 			Somme newSomme = new Somme(nombreDeChiffres, nombre);
 
@@ -86,7 +97,7 @@ public class NombresFlechesPanel extends Container {
 			panel1.setBackground(Color.WHITE);
 
 			String resultatString = "";
-						
+
 			for (String str : newSomme.getListSommes()) {
 				resultatString += str + "\n";
 			}
@@ -100,14 +111,14 @@ public class NombresFlechesPanel extends Container {
 			panelSud.add(panel1);
 			panelSud.add(panel2);
 			panelSud.setLayout(new BoxLayout(panelSud, BoxLayout.PAGE_AXIS));
-			
+
 			conteneur.removeAll();
 			conteneur.add(panelSud);
 			conteneur.setBackground(Color.WHITE);
-					
+
 			panel.add(conteneur, BorderLayout.SOUTH);
 			panel.revalidate();
-	
+
 		}
 	}
 
