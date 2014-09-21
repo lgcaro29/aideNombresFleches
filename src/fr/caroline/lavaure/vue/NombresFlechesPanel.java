@@ -75,7 +75,9 @@ public class NombresFlechesPanel extends Container {
 		public void actionPerformed(ActionEvent e) {
 
 			int nombre;
-			// on vérifie bien que c'est un nombre qui est saisi
+			
+			// On vérifie que le nombre saisi est compris entre 3 et 45
+			// sinon il est mis à 3
 			String strg = nombreFTextField.getText();
 			if (strg.matches("~[3-45]")){
 				nombre = Integer.parseInt(nombreFTextField.getText());
